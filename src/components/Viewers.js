@@ -8,16 +8,16 @@ function Viewers() {
         <img src={process.env.PUBLIC_URL + "/images/viewers-disney.png"} />
       </Wrap>
       <Wrap>
-        <img src={process.env.PUBLIC_URL + "/images/viewers-disney.png"} />
+        <img src={process.env.PUBLIC_URL + "/images/viewers-pixar.png"} />
       </Wrap>
       <Wrap>
-        <img src={process.env.PUBLIC_URL + "/images/viewers-disney.png"} />
+        <img src={process.env.PUBLIC_URL + "/images/viewers-marvel.png"} />
       </Wrap>
       <Wrap>
-        <img src={process.env.PUBLIC_URL + "/images/viewers-disney.png"} />
+        <img src={process.env.PUBLIC_URL + "/images/viewers-starwars.png"} />
       </Wrap>
       <Wrap>
-        <img src={process.env.PUBLIC_URL + "/images/viewers-disney.png"} />
+        <img src={process.env.PUBLIC_URL + "/images/viewers-national.png"} />
       </Wrap>
     </Container>
   );
