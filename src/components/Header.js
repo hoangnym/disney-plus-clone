@@ -31,6 +31,7 @@ function Header() {
           <span>SERIES</span>
         </a>
       </NavMenu>
+      <UserImg src={process.env.PUBLIC_URL + "/images/goku.png"} />
     </Nav>
   );
 }
@@ -51,11 +52,15 @@ const Logo = styled.img`
 
 const NavMenu = styled.div`
   display: flex;
+  flex: 1;
+  margin-left: 25px;
+  align-items: center;
 
   a {
     display: flex;
     align-items: center;
     padding: 0 12px;
+    cursor: pointer;
     img {
       height: 20px;
     }
@@ -65,4 +70,11 @@ const NavMenu = styled.div`
     font-size: 13px;
     letter-spacing: 1.42px;
   }
+`;
+
+const UserImg = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
 `;
