@@ -20,7 +20,7 @@ const Container = styled.div`
   position: relative;
   min-height: calc(100vh - 70px);
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: center;
 
   &:before {
@@ -36,6 +36,7 @@ const Container = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
+    opacity: 0.7;
     z-index: -1;
   }
 `;
@@ -46,6 +47,8 @@ const CTA = styled.div`
   padding: 80px 40px;
   display: flex;
   flex-direction: column;
+  margin-top: 100px;
+  align-items: center;
 `;
 
 const CTALogoOne = styled.img``;
@@ -79,4 +82,6 @@ const Description = styled.p`
   text-transform: capitalize;
 `;
 
-const CTALogoTwo = styled.img``;
+const CTALogoTwo = styled.img`
+  width: 90%;
+`;
