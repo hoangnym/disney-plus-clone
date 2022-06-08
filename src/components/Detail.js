@@ -8,7 +8,7 @@ function Detail() {
         <img src={process.env.PUBLIC_URL + "/images/bao.jpg"} />
       </Background>
       <ImageTitle>
-        <img src={process.env.PUBLIC_URL + "/images/bao-title.jpeg"} />
+        <img src={process.env.PUBLIC_URL + "/images/bao_logo.png"} />
       </ImageTitle>
       <Controls>
         <PlayButton>
@@ -26,6 +26,12 @@ function Detail() {
           <img src={process.env.PUBLIC_URL + "/images/group-icon.png"} />
         </GroupWatchButton>
       </Controls>
+      <SubTitle>2018 | 7m | Family, Fantasy, Kids, Animation</SubTitle>
+      <Description>
+        A Chinese mom who’s sad when her grown son leaves home gets another
+        chance at motherhood when one of her dumplings springs to life. But she
+        finds that nothing stays cute and small forever.
+      </Description>
     </Container>
   );
 }
@@ -120,4 +126,18 @@ const AddButton = styled.button`
 
 const GroupWatchButton = styled(AddButton)`
   background-color: rgb(0, 0, 0);
+`;
+
+const SubTitle = styled.div`
+  font-size: 15px;
+  min-height: 20px;
+  margin-top: 26px;
+  color: rgb(249, 249, 249);
+`;
+
+const Description = styled.div`
+  line-height: 1.4;
+  font-size: 20px;
+  margin-top: 16px;
+  color: rgb(249, 249, 249);
 `;
