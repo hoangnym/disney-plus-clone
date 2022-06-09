@@ -1,37 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useParams } from "react-router-dom";
+import db from "../firebase";
 
 function Detail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState();
+
+  useEffect(() => {
+    // Grab the movie info from the DB
+    db.collection("movies")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          // save the movie data
+          setMovie(doc.data());
+        } else {
+          // redirect to home page
+        }
+      });
+  }, []);
+
   return (
     <Container>
-      <Background>
-        <img src={process.env.PUBLIC_URL + "/images/bao.jpg"} />
-      </Background>
-      <ImageTitle>
-        <img src={process.env.PUBLIC_URL + "/images/bao_logo.png"} />
-      </ImageTitle>
-      <Controls>
-        <PlayButton>
-          <img src={process.env.PUBLIC_URL + "/images/play-icon-black.png"} />
-          <span>Play</span>
-        </PlayButton>
-        <TrailerButton>
-          <img src={process.env.PUBLIC_URL + "/images/play-icon-white.png"} />
-          <span>Trailer</span>
-        </TrailerButton>
-        <AddButton>
-          <span>+</span>
-        </AddButton>
-        <GroupWatchButton>
-          <img src={process.env.PUBLIC_URL + "/images/group-icon.png"} />
-        </GroupWatchButton>
-      </Controls>
-      <SubTitle>2018 | 7m | Family, Fantasy, Kids, Animation</SubTitle>
-      <Description>
-        A Chinese mom who’s sad when her grown son leaves home gets another
-        chance at motherhood when one of her dumplings springs to life. But she
-        finds that nothing stays cute and small forever.
-      </Description>
+      {movie && (
+        <>
+          <Background>
+            <img src={movie.backgroundImg} />
+          </Background>
+          <ImageTitle>
+            <p>{movie.title}</p>
+          </ImageTitle>
+          <Controls>
+            <PlayButton>
+              <img
+                src={process.env.PUBLIC_URL + "/images/play-icon-black.png"}
+              />
+              <span>Play</span>
+            </PlayButton>
+            <TrailerButton>
+              <img
+                src={process.env.PUBLIC_URL + "/images/play-icon-white.png"}
+              />
+              <span>Trailer</span>
+            </TrailerButton>
+            <AddButton>
+              <span>+</span>
+            </AddButton>
+            <GroupWatchButton>
+              <img src={process.env.PUBLIC_URL + "/images/group-icon.png"} />
+            </GroupWatchButton>
+          </Controls>
+          <SubTitle>{movie.subTitle}</SubTitle>
+          <Description>{movie.description}</Description>
+        </>
+      )}
     </Container>
   );
 }
@@ -51,7 +75,7 @@ const Background = styled.div`
   bottom: 0;
   right: 0;
   z-index: -1;
-  opacity: 0.75;
+  opacity: 0.49;
   img {
     height: 100%;
     width: 100%;
@@ -60,14 +84,12 @@ const Background = styled.div`
 `;
 
 const ImageTitle = styled.div`
-  height: 30vh;
-  min-height: 170px;
+  padding-top: 100px;
   width: 35vw;
   min-width: 200px;
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+  p {
+    font-size: 70px;
+    align-items: bottom;
   }
 `;
 
