@@ -1,23 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { selectMovies } from "../features/movie/movieSlice";
+import { useSelector } from "react-redux";
 
 function Movies() {
+  const movies = useSelector(selectMovies);
+
+  console.log(movies);
+
   return (
     <Container>
       <h4>Recommended for You</h4>
       <Content>
-        <Wrap>
-          <img src={process.env.PUBLIC_URL + "/images/dragonball.jpeg"} />
-        </Wrap>
-        <Wrap>
-          <img src={process.env.PUBLIC_URL + "/images/kimetsu-no-yaiba.webp"} />
-        </Wrap>
-        <Wrap>
-          <img src={process.env.PUBLIC_URL + "/images/onepiece.webp"} />
-        </Wrap>
-        <Wrap>
-          <img src={process.env.PUBLIC_URL + "/images/hajime-no-ippo.jpeg"} />
-        </Wrap>
+        {movies &&
+          movies.map((movie) => (
+            <Wrap key={movie.id}>
+              <img src={movie.cardImg} />
+            </Wrap>
+          ))}
         <Wrap>
           <img src={process.env.PUBLIC_URL + "/images/dragonball.jpeg"} />
         </Wrap>
