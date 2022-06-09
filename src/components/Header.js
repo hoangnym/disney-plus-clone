@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
 import {
   selectUserName,
   selectUserPhoto,
   setUserLogin,
+  setSignOut,
 } from "../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
 
@@ -23,6 +26,14 @@ function Header() {
           photo: user.photoURL,
         })
       );
+      navigate("/");
+    });
+  };
+
+  const signOut = () => {
+    auth.signOut().then(() => {
+      dispatch(setSignOut());
+      navigate("/login");
     });
   };
 
@@ -63,7 +74,10 @@ function Header() {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src={process.env.PUBLIC_URL + "/images/goku.png"} />
+          <UserImg
+            onClick={signOut}
+            src={process.env.PUBLIC_URL + "/images/goku.png"}
+          />
         </>
       )}
     </Nav>
