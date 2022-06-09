@@ -1,13 +1,15 @@
-import firebase from "firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA9BnlX96fMf7XiUVCFRsoQzG8DGERJkeY",
-  authDomain: "disneyplus-clone-a33d5.firebaseapp.com",
-  projectId: "disneyplus-clone-a33d5",
-  storageBucket: "disneyplus-clone-a33d5.appspot.com",
-  messagingSenderId: "37918794208",
-  appId: "1:37918794208:web:dbe9842dfe1dda522a4b85",
-  measurementId: "G-DRVLJKWRWG",
+  apiKey: "AIzaSyDUfmuFqLRDUVi7fQJuEZpF6SKXTGTbdYk",
+  authDomain: "react-demos-9fb8e.firebaseapp.com",
+  projectId: "react-demos-9fb8e",
+  storageBucket: "react-demos-9fb8e.appspot.com",
+  messagingSenderId: "659794705641",
+  appId: "1:659794705641:web:e82fc03e1f674badfdc478",
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
