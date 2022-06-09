@@ -1,37 +1,71 @@
 import React from "react";
 import styled from "styled-components";
+import { auth, provider } from "../firebase";
+import {
+  selectUserName,
+  selectUserPhoto,
+  setUserLogin,
+} from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
+  const dispatch = useDispatch();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
+
+  const signIn = () => {
+    auth.signInWithPopup(provider).then((result) => {
+      let user = result.user;
+      dispatch(
+        setUserLogin({
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        })
+      );
+    });
+  };
+
   return (
     <Nav>
       <Logo src={process.env.PUBLIC_URL + "/images/logo.svg"} />
-      <NavMenu>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/home-icon.svg"} />
-          <span>HOME</span>
-        </a>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/search-icon.svg"} />
-          <span>SEARCH</span>
-        </a>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/watchlist-icon.svg"} />
-          <span>WATCHLIST</span>
-        </a>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/original-icon.svg"} />
-          <span>ORIGINALS</span>
-        </a>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/movie-icon.svg"} />
-          <span>MOVIES</span>
-        </a>
-        <a>
-          <img src={process.env.PUBLIC_URL + "/images/series-icon.svg"} />
-          <span>SERIES</span>
-        </a>
-      </NavMenu>
-      <UserImg src={process.env.PUBLIC_URL + "/images/goku.png"} />
+      {!userName ? (
+        <LoginContainer>
+          <Login onClick={signIn}>Login</Login>
+        </LoginContainer>
+      ) : (
+        <>
+          <NavMenu>
+            <a>
+              <img src={process.env.PUBLIC_URL + "/images/home-icon.svg"} />
+              <span>HOME</span>
+            </a>
+            <a>
+              <img src={process.env.PUBLIC_URL + "/images/search-icon.svg"} />
+              <span>SEARCH</span>
+            </a>
+            <a>
+              <img
+                src={process.env.PUBLIC_URL + "/images/watchlist-icon.svg"}
+              />
+              <span>WATCHLIST</span>
+            </a>
+            <a>
+              <img src={process.env.PUBLIC_URL + "/images/original-icon.svg"} />
+              <span>ORIGINALS</span>
+            </a>
+            <a>
+              <img src={process.env.PUBLIC_URL + "/images/movie-icon.svg"} />
+              <span>MOVIES</span>
+            </a>
+            <a>
+              <img src={process.env.PUBLIC_URL + "/images/series-icon.svg"} />
+              <span>SERIES</span>
+            </a>
+          </NavMenu>
+          <UserImg src={process.env.PUBLIC_URL + "/images/goku.png"} />
+        </>
+      )}
     </Nav>
   );
 }
@@ -100,4 +134,27 @@ const UserImg = styled.img`
   height: 48px;
   border-radius: 50%;
   cursor: pointer;
+`;
+
+const Login = styled.div`
+  border: 1px solid #f9f9f9;
+  padding: 8px 16px;
+  border-radius: 4px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease 0s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f9f9f9;
+    color: #000;
+    border-color: transparent;
+  }
+`;
+
+const LoginContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 `;
